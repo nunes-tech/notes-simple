@@ -2,19 +2,19 @@
 
 ## Saiba mais sobre o app e suas funções.
 
-### Crie, Edite, e Delete tarefas(notas) no aplicativos de forma simples e facil.
+### Crie, Edite, e Delete tarefas(notas) no aplicativo de forma simples e facil.
 
 #### Criar tarefa
-Para criar sua primeira nota, basta entrar no app e em seguida clicar no botão flutuante, também pode ir pelo menu clicando em nova tarefa. Na tela seguinte, escreva sua nota e clicar no botão adicionar tarefa. Feito isso sua tarefa será listada na tela inicial do app.
+Para criar sua primeira nota, basta entrar no app e em seguida clicar no botão flutuante, também pode ir pelo menu clicando em nova tarefa. Na tela seguinte, escreva sua nota, depois clique no botão adicionar tarefa. Feito isso sua tarefa será listada na tela inicial do app.
 
 #### Editar tarefa
-Para editar basta clicar sobre a tarefa, em seguida fazer as alterções e finalize clicando em editar tarefa.
+Para editar tarefas basta clicar sobre uma tarefa, em seguida fazer as alterações, finalize clicando em editar tarefa.
 
 #### Deletar tarefa
-Para deletar uma tarefa basta pressionar logamente, tipo pressionar por 3 segundos, aparecerá um pop-up, perguntando se você deseja excluir a tarefa, basta clicar em sim para apagar, ou clicar em não para não deletar.
+Para deletar uma tarefa basta pressionar longamente, tipo pressionar por 3 segundos sobre a tarefa, aparecerá um pop-up, perguntando se você deseja excluir a tarefa, basta clicar em sim para apagar, ou clicar em não para não deletar.
 
-### Alterar os modo de cisualização das tarefas.
-No menu clique icone em formas de blocos e a apresentação das suas notas será alterada, para lista ou para grade.
+### Alterar os modo de visualização das tarefas.
+No menu superior clique no ícone em formas de blocos e a apresentação das suas notas será alterada, para lista ou para grade.
 
 ## Espero que goste do app.
 
@@ -23,5 +23,8 @@ No menu clique icone em formas de blocos e a apresentação das suas notas será
 
 ✔SQLite - banco de dados do Android.
 ✔Hilt para injeção de dependencias (DI)
-✔Padrões de projeto Adapter e DAO
-✔Componentes RecyclerView, Menu, Material Toolbar
+✔Padrões de projeto Adapter e DAO e Builder.
+## Componentes de interface:
+✔RecyclerView
+✔Menu
+✔Material Toolbar
