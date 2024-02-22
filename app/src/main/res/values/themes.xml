@@ -1,0 +1,17 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.NotesSimple" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/primaria</item>
+        <item name="colorSecondary">@color/secundaria</item>
+        <item name="actionOverflowButtonStyle">@style/style.toolbar</item>
+    </style>
+
+    <style name="style.toolbar" parent="@style/Widget.AppCompat.ActionButton.Overflow">
+        <item name="tint">
+            @color/white
+        </item>
+    </style>
+
+    <style name="Theme.NotesSimple" parent="Base.Theme.NotesSimple" />
+</resources>

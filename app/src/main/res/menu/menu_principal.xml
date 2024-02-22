@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menuConfig"
+        android:icon="@drawable/ic_toggle_list_24"
+        android:title="Configurar"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menuNovaTarefa"
+        android:title="Nova tarefa"
+        android:visible="false" />
+</menu>
