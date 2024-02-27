@@ -1,5 +1,5 @@
 # Bem vindo(a) ao meu projeto Notas Simples.
-https://github.com/nunes-tech/notes-simple/blob/main/app-notes-simple.png
+![Imagem demonstrativa do app](https://github.com/nunes-tech/notes-simple/blob/main/app-notes-simple.png)
 
 ## Saiba mais sobre o app e suas funções.
 
