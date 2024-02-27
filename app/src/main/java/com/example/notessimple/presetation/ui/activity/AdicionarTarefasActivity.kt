@@ -5,14 +5,14 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
 import com.example.notessimple.R
-import com.example.notessimple.data.db.ITarefaDAO
 import com.example.notessimple.data.model.Tarefa
 import com.example.notessimple.databinding.ActivityAdicionarTarefasBinding
+import com.example.notessimple.presetation.viewmodel.TarefasViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class AdicionarTarefasActivity : AppCompatActivity() {
@@ -20,7 +20,9 @@ class AdicionarTarefasActivity : AppCompatActivity() {
     private val binding by lazy {
         ActivityAdicionarTarefasBinding.inflate(layoutInflater)
     }
-    @Inject lateinit var databaseDAO : ITarefaDAO
+
+    private val tarefasViewModel : TarefasViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -32,7 +34,7 @@ class AdicionarTarefasActivity : AppCompatActivity() {
             val texto = binding.editTextNovaTarefa.text.toString()
             if (texto.isNotEmpty()) {
                 val tarefa = Tarefa(-1, texto, null)
-                if (databaseDAO.inserir(tarefa)) {
+                if (tarefasViewModel.inserirTarefa(tarefa)) {
                     Toast.makeText(this, "Sucesso ao salvar", Toast.LENGTH_SHORT).show()
                     finish()
                 } else {

@@ -5,7 +5,7 @@ import android.content.Context
 import android.util.Log
 import com.example.notessimple.data.model.Tarefa
 
-class TarefasDAOImpl(context: Context) : ITarefaDAO {
+class TarefasDAOImpl(context: Context) : TarefasDAO {
 
     private val dataBaseHelper = DatabaseHelper(context)
     private val escreva = dataBaseHelper.writableDatabase

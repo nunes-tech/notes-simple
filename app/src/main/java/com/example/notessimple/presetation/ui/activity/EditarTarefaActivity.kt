@@ -4,21 +4,24 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
 import com.example.notessimple.R
-import com.example.notessimple.data.db.ITarefaDAO
 import com.example.notessimple.data.model.Tarefa
 import com.example.notessimple.databinding.ActivityEditarTarefaBinding
+import com.example.notessimple.presetation.viewmodel.TarefasViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class EditarTarefaActivity : AppCompatActivity() {
+
     private val binding by lazy {
         ActivityEditarTarefaBinding.inflate(layoutInflater)
     }
-    @Inject lateinit var databaseDAO : ITarefaDAO
+
+    private val tarefasViewModel : TarefasViewModel by viewModels()
+
     private var id: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +43,7 @@ class EditarTarefaActivity : AppCompatActivity() {
                 val tarefaDescricao = binding.editTextEditarTarefa.text.toString()
                 if (tarefaDescricao.isNotEmpty()) {
                     val tarefaEditada = Tarefa(id!!, tarefaDescricao, null)
-                    if (databaseDAO.atualizar( tarefaEditada )) {
+                    if (tarefasViewModel.atualizarTarefa( tarefaEditada )) {
                         finish()
                     }
                 } else {

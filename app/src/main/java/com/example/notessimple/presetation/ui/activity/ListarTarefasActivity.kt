@@ -7,24 +7,23 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.notessimple.R
-import com.example.notessimple.data.db.ITarefaDAO
-import com.example.notessimple.data.model.Tarefa
 import com.example.notessimple.databinding.ActivityListarTarefasBinding
 import com.example.notessimple.presetation.ui.adapter.ListenerOnRecyclerView
 import com.example.notessimple.presetation.ui.adapter.TarefasAdapter
+import com.example.notessimple.presetation.viewmodel.TarefasViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class ListarTarefasActivity : AppCompatActivity(), ListenerOnRecyclerView {
 
-    @Inject lateinit var databaseDAO : ITarefaDAO
+    private val tarefasViewModel : TarefasViewModel by viewModels()
 
     private var exibirGrid = false
 
@@ -34,7 +33,6 @@ class ListarTarefasActivity : AppCompatActivity(), ListenerOnRecyclerView {
     private val adapterTarefa by lazy {
         TarefasAdapter(this)
     }
-    private var listaTarefas: List<Tarefa> = emptyList()
 
     override fun onStart() {
         super.onStart()
@@ -45,6 +43,7 @@ class ListarTarefasActivity : AppCompatActivity(), ListenerOnRecyclerView {
         super.onCreate(savedInstanceState)
         setContentView( binding.root )
 
+        initObserve()
         initToolbar()
         initMenu()
         setRecyclerViewTarefas()
@@ -58,6 +57,18 @@ class ListarTarefasActivity : AppCompatActivity(), ListenerOnRecyclerView {
     override fun itemLongClick(id: Int) {
         deleteTask(id)
     }
+
+    private fun initObserve() {
+        tarefasViewModel.listaTarefas.observe(this) { listaTarefas ->
+            adapterTarefa.setListaTarefas( listaTarefas )
+            if(listaTarefas.isEmpty()) {
+                binding.imageSemNotas.visibility = View.VISIBLE
+            } else {
+                binding.imageSemNotas.visibility = View.GONE
+            }
+        }
+    }
+
     private fun setRecyclerViewTarefas() {
         if (exibirGrid) {
             binding.rvTarefas.adapter = adapterTarefa
@@ -75,13 +86,7 @@ class ListarTarefasActivity : AppCompatActivity(), ListenerOnRecyclerView {
     */
 
     private fun listTasks() {
-        listaTarefas = databaseDAO.listar()
-        adapterTarefa.setListaTarefas( listaTarefas )
-        if(listaTarefas.isEmpty()) {
-            binding.imageSemNotas.visibility = View.VISIBLE
-        } else {
-            binding.imageSemNotas.visibility = View.GONE
-        }
+        tarefasViewModel.recuperarTarefas()
     }
 
     private fun createTask() {
@@ -101,7 +106,7 @@ class ListarTarefasActivity : AppCompatActivity(), ListenerOnRecyclerView {
             .setTitle("Deletar tarefa.")
             .setMessage("Tem certeza que deseja deletar essa tarefa?")
             .setPositiveButton("Sim!") { _, _ ->
-                if (databaseDAO.deletar(id)) {
+                if (tarefasViewModel.deletarTarefa(id)) {
                     Toast.makeText(
                         this@ListarTarefasActivity,
                         "Tarefa removida",
