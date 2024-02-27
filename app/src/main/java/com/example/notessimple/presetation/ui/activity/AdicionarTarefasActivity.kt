@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
 import com.example.notessimple.R
-import com.example.notessimple.data.db.TarefasDAO
+import com.example.notessimple.data.db.ITarefaDAO
 import com.example.notessimple.data.model.Tarefa
 import com.example.notessimple.databinding.ActivityAdicionarTarefasBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +20,7 @@ class AdicionarTarefasActivity : AppCompatActivity() {
     private val binding by lazy {
         ActivityAdicionarTarefasBinding.inflate(layoutInflater)
     }
-    @Inject lateinit var databaseDAO : TarefasDAO
+    @Inject lateinit var databaseDAO : ITarefaDAO
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)

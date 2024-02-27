@@ -13,7 +13,7 @@ import androidx.core.view.MenuProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.notessimple.R
-import com.example.notessimple.data.db.TarefasDAO
+import com.example.notessimple.data.db.ITarefaDAO
 import com.example.notessimple.data.model.Tarefa
 import com.example.notessimple.databinding.ActivityListarTarefasBinding
 import com.example.notessimple.presetation.ui.adapter.ListenerOnRecyclerView
@@ -24,7 +24,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ListarTarefasActivity : AppCompatActivity(), ListenerOnRecyclerView {
 
-    @Inject lateinit var databaseDAO : TarefasDAO
+    @Inject lateinit var databaseDAO : ITarefaDAO
 
     private var exibirGrid = false
 

@@ -7,7 +7,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
 import com.example.notessimple.R
-import com.example.notessimple.data.db.TarefasDAO
+import com.example.notessimple.data.db.ITarefaDAO
 import com.example.notessimple.data.model.Tarefa
 import com.example.notessimple.databinding.ActivityEditarTarefaBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,7 +18,7 @@ class EditarTarefaActivity : AppCompatActivity() {
     private val binding by lazy {
         ActivityEditarTarefaBinding.inflate(layoutInflater)
     }
-    @Inject lateinit var databaseDAO : TarefasDAO
+    @Inject lateinit var databaseDAO : ITarefaDAO
     private var id: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
