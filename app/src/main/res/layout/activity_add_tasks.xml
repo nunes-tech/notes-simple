@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presetation.ui.activity.EditarTarefaActivity">
+    tools:context=".presetation.ui.activity.AddTasksActivity">
 
     <include
-        android:id="@+id/includeEditarToolbar"
+        android:id="@+id/includeAddToolbar"
         layout="@layout/toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutTextEditarTarefa"
+        android:id="@+id/layoutTextAddTask"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -26,25 +26,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/includeEditarToolbar">
+        app:layout_constraintTop_toBottomOf="@+id/includeAddToolbar">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextEditarTarefa"
+            android:id="@+id/editTextNewTask"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:singleLine="false"
-            android:text="Editar tarefa" />
+            android:hint="Digite uma nova tarefa" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btnEditarTarefa"
+        android:id="@+id/btnAddTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Editar Tarefa"
+        android:text="Adicionar Tarefa"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutTextEditarTarefa" />
+        app:layout_constraintTop_toBottomOf="@+id/layoutTextAddTask" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

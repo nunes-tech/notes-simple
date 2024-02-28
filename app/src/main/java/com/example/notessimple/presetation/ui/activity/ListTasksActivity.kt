@@ -6,35 +6,33 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.notessimple.R
-import com.example.notessimple.data.db.TarefasDAO
-import com.example.notessimple.data.model.Tarefa
-import com.example.notessimple.databinding.ActivityListarTarefasBinding
+import com.example.notessimple.databinding.ActivityListTasksBinding
 import com.example.notessimple.presetation.ui.adapter.ListenerOnRecyclerView
-import com.example.notessimple.presetation.ui.adapter.TarefasAdapter
+import com.example.notessimple.presetation.ui.adapter.TasksAdapter
+import com.example.notessimple.presetation.viewmodel.TasksViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class ListarTarefasActivity : AppCompatActivity(), ListenerOnRecyclerView {
+class ListTasksActivity : AppCompatActivity(), ListenerOnRecyclerView {
 
-    @Inject lateinit var databaseDAO : TarefasDAO
+    private val tasksViewModel : TasksViewModel by viewModels()
 
-    private var exibirGrid = false
+    private var showGrid = false
 
     private val binding by lazy {
-        ActivityListarTarefasBinding.inflate( layoutInflater )
+        ActivityListTasksBinding.inflate( layoutInflater )
     }
-    private val adapterTarefa by lazy {
-        TarefasAdapter(this)
+    private val adapterTasks by lazy {
+        TasksAdapter(this)
     }
-    private var listaTarefas: List<Tarefa> = emptyList()
 
     override fun onStart() {
         super.onStart()
@@ -45,10 +43,11 @@ class ListarTarefasActivity : AppCompatActivity(), ListenerOnRecyclerView {
         super.onCreate(savedInstanceState)
         setContentView( binding.root )
 
+        initObserve()
         initToolbar()
         initMenu()
         setRecyclerViewTarefas()
-        binding.fabAddTarefa.setOnClickListener { createTask() }
+        binding.fabAddTask.setOnClickListener { createTask() }
     }
 
     override fun itemClick(id: Int, tarefa: String) {
@@ -58,15 +57,27 @@ class ListarTarefasActivity : AppCompatActivity(), ListenerOnRecyclerView {
     override fun itemLongClick(id: Int) {
         deleteTask(id)
     }
+
+    private fun initObserve() {
+        tasksViewModel.listTasks.observe(this) { listTasks ->
+            adapterTasks.setListTasks( listTasks )
+            if(listTasks.isEmpty()) {
+                binding.imageNoNotes.visibility = View.VISIBLE
+            } else {
+                binding.imageNoNotes.visibility = View.GONE
+            }
+        }
+    }
+
     private fun setRecyclerViewTarefas() {
-        if (exibirGrid) {
-            binding.rvTarefas.adapter = adapterTarefa
-            binding.rvTarefas.layoutManager = GridLayoutManager(this, 2)
-            exibirGrid = !exibirGrid
+        if (showGrid) {
+            binding.rvTasks.adapter = adapterTasks
+            binding.rvTasks.layoutManager = GridLayoutManager(this, 2)
+            showGrid = !showGrid
         } else {
-            binding.rvTarefas.adapter = adapterTarefa
-            binding.rvTarefas.layoutManager = LinearLayoutManager(this)
-            exibirGrid = !exibirGrid
+            binding.rvTasks.adapter = adapterTasks
+            binding.rvTasks.layoutManager = LinearLayoutManager(this)
+            showGrid = !showGrid
         }
     }
 
@@ -75,38 +86,35 @@ class ListarTarefasActivity : AppCompatActivity(), ListenerOnRecyclerView {
     */
 
     private fun listTasks() {
-        listaTarefas = databaseDAO.listar()
-        adapterTarefa.setListaTarefas( listaTarefas )
-        if(listaTarefas.isEmpty()) {
-            binding.imageSemNotas.visibility = View.VISIBLE
-        } else {
-            binding.imageSemNotas.visibility = View.GONE
-        }
+        tasksViewModel.getAllTasks()
     }
 
     private fun createTask() {
-        val intent = Intent(this, AdicionarTarefasActivity::class.java)
+        val intent = Intent(this, AddTasksActivity::class.java)
         startActivity( intent )
     }
 
-    private fun updateTask(id: Int, tarefa: String) {
-        val intent = Intent(this, EditarTarefaActivity::class.java)
+    private fun updateTask(id: Int, task: String) {
+        val intent = Intent(this, EditTasksActivity::class.java)
         intent.putExtra("id", id)
-        intent.putExtra("tarefa", tarefa)
+        intent.putExtra("task", task)
         startActivity( intent )
     }
 
     private fun deleteTask(id: Int) {
+
         val alertDialog = AlertDialog.Builder(this)
             .setTitle("Deletar tarefa.")
             .setMessage("Tem certeza que deseja deletar essa tarefa?")
             .setPositiveButton("Sim!") { _, _ ->
-                if (databaseDAO.deletar(id)) {
-                    Toast.makeText(
-                        this@ListarTarefasActivity,
-                        "Tarefa removida",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                if (tasksViewModel.deleteTask(id)) {
+
+                    val snackbar = Snackbar.make(
+                        binding.root,
+                        "Tarefa deletada!",
+                        Snackbar.LENGTH_LONG)
+
+                    snackbar.show()
                     listTasks()
                 }
             }
@@ -119,9 +127,9 @@ class ListarTarefasActivity : AppCompatActivity(), ListenerOnRecyclerView {
         addMenuProvider(
             object : MenuProvider {
                 override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                    menuInflater.inflate(R.menu.menu_principal, menu)
-                    val menuNovaTarefa = menu.findItem( R.id.menuNovaTarefa )
-                    menuNovaTarefa.isVisible = true
+                    menuInflater.inflate(R.menu.menu_main, menu)
+                    val menuNewTask = menu.findItem( R.id.menuNovaTarefa )
+                    menuNewTask.isVisible = true
                 }
 
                 override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -139,7 +147,7 @@ class ListarTarefasActivity : AppCompatActivity(), ListenerOnRecyclerView {
     //Inicializa minha toolbar customizada
     private fun initToolbar() {
         setSupportActionBar(
-            binding.includeToolbar.toolbar
+            binding.includeListToolbar.toolbar
         ).apply {
             title = getString( R.string.app_name )
         }

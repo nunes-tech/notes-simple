@@ -14,16 +14,16 @@
         android:theme="@style/Theme.NotesSimple"
         tools:targetApi="31">
         <activity
-            android:name=".presetation.ui.activity.AdicionarTarefasActivity"
+            android:name=".presetation.ui.activity.AddTasksActivity"
             android:exported="false" />
         <activity
-            android:name=".presetation.ui.activity.EditarTarefaActivity"
+            android:name=".presetation.ui.activity.EditTasksActivity"
             android:exported="false" />
         <activity
             android:name=".presetation.ui.activity.OutraTelaActivity"
             android:exported="false" />
         <activity
-            android:name=".presetation.ui.activity.ListarTarefasActivity"
+            android:name=".presetation.ui.activity.ListTasksActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
