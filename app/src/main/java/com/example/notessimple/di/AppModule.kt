@@ -1,10 +1,10 @@
 package com.example.notessimple.di
 
 import android.content.Context
-import com.example.notessimple.data.db.TarefasDAO
-import com.example.notessimple.data.db.TarefasDAOImpl
-import com.example.notessimple.data.repository.TarefasRepository
-import com.example.notessimple.data.repository.TarefasRepositoryImpl
+import com.example.notessimple.data.db.TasksDAO
+import com.example.notessimple.data.db.TasksDAOImpl
+import com.example.notessimple.data.repository.TasksRepository
+import com.example.notessimple.data.repository.TasksRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,17 +16,17 @@ import dagger.hilt.components.SingletonComponent
 object AppModule {
 
     @Provides
-    fun proverTarefaDAO(
+    fun provideTasksDAO(
         @ApplicationContext context: Context
-    ) : TarefasDAO {
-        return TarefasDAOImpl( context )
+    ) : TasksDAO {
+        return TasksDAOImpl( context )
     }
 
     @Provides
-    fun proverTarefasRepository(
-        tarefasDAOImpl: TarefasDAO
-    ) : TarefasRepository {
-        return TarefasRepositoryImpl( tarefasDAOImpl )
+    fun provideTasksRepository(
+        tasksDAOImpl: TasksDAO
+    ) : TasksRepository {
+        return TasksRepositoryImpl( tasksDAOImpl )
     }
 
 }

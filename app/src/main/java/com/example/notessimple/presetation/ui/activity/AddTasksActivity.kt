@@ -9,57 +9,57 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
 import com.example.notessimple.R
-import com.example.notessimple.data.model.Tarefa
-import com.example.notessimple.databinding.ActivityAdicionarTarefasBinding
-import com.example.notessimple.presetation.viewmodel.TarefasViewModel
+import com.example.notessimple.data.model.Task
+import com.example.notessimple.databinding.ActivityAddTasksBinding
+import com.example.notessimple.presetation.viewmodel.TasksViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AdicionarTarefasActivity : AppCompatActivity() {
+class AddTasksActivity : AppCompatActivity() {
 
     private val binding by lazy {
-        ActivityAdicionarTarefasBinding.inflate(layoutInflater)
+        ActivityAddTasksBinding.inflate(layoutInflater)
     }
 
-    private val tarefasViewModel : TarefasViewModel by viewModels()
+    private val tasksViewModel : TasksViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        inicializarToolbar()
-        inicializarMenu()
+        initToolbar()
+        initMenu()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        binding.btnAdicionarTarefa.setOnClickListener {
-            val texto = binding.editTextNovaTarefa.text.toString()
+        binding.btnAddTask.setOnClickListener {
+            val texto = binding.editTextNewTask.text.toString()
             if (texto.isNotEmpty()) {
-                val tarefa = Tarefa(-1, texto, null)
-                if (tarefasViewModel.inserirTarefa(tarefa)) {
+                val task = Task(-1, texto, null)
+                if (tasksViewModel.insertTask(task)) {
                     Toast.makeText(this, "Sucesso ao salvar", Toast.LENGTH_SHORT).show()
                     finish()
                 } else {
                     Toast.makeText(this, "Falha ao salvar", Toast.LENGTH_SHORT).show()
                 }
             } else {
-                binding.layoutTextTarefa.error = "Digite uma tarefa"
+                binding.layoutTextAddTask.error = "Digite uma tarefa"
             }
         }
     }
 
-    private fun inicializarToolbar() {
+    private fun initToolbar() {
         setSupportActionBar(
-            binding.includeAdicionarToolbar.toolbar
+            binding.includeAddToolbar.toolbar
         ).apply {
             title = "Adicionar nova tarefa"
         }
     }
-    private fun inicializarMenu() {
+    private fun initMenu() {
         addMenuProvider(
             object : MenuProvider {
                 override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                    menuInflater.inflate(R.menu.menu_principal, menu)
-                    val menuOpcaoOcultar = menu.findItem( R.id.menuConfig )
-                    menuOpcaoOcultar.isVisible = false
+                    menuInflater.inflate(R.menu.menu_main, menu)
+                    val menuItemHide = menu.findItem( R.id.menuConfig )
+                    menuItemHide.isVisible = false
                 }
 
                 override fun onMenuItemSelected(menuItem: MenuItem): Boolean {

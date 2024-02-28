@@ -8,67 +8,67 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
 import com.example.notessimple.R
-import com.example.notessimple.data.model.Tarefa
-import com.example.notessimple.databinding.ActivityEditarTarefaBinding
-import com.example.notessimple.presetation.viewmodel.TarefasViewModel
+import com.example.notessimple.data.model.Task
+import com.example.notessimple.databinding.ActivityEditTasksBinding
+import com.example.notessimple.presetation.viewmodel.TasksViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class EditarTarefaActivity : AppCompatActivity() {
+class EditTasksActivity : AppCompatActivity() {
 
     private val binding by lazy {
-        ActivityEditarTarefaBinding.inflate(layoutInflater)
+        ActivityEditTasksBinding.inflate(layoutInflater)
     }
 
-    private val tarefasViewModel : TarefasViewModel by viewModels()
+    private val tasksViewModel : TasksViewModel by viewModels()
 
     private var id: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        inicializarToolbar()
-        inicializarMenu()
+        initToolbar()
+        initMenu()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val bundle = intent.extras
         if (bundle != null) {
             id = bundle.getInt("id")
-            val tarefa = bundle.getString("tarefa") ?: "Falha ao recuperar tarefa"
-            binding.editTextEditarTarefa.setText( tarefa )
+            val task = bundle.getString("task") ?: "Falha ao recuperar tarefa"
+            binding.editTextEditTask.setText( task )
         }
 
-        binding.btnEditarTarefa.setOnClickListener {
+        binding.btnEditTask.setOnClickListener {
             if ( id != null) {
-                val tarefaDescricao = binding.editTextEditarTarefa.text.toString()
-                if (tarefaDescricao.isNotEmpty()) {
-                    val tarefaEditada = Tarefa(id!!, tarefaDescricao, null)
-                    if (tarefasViewModel.atualizarTarefa( tarefaEditada )) {
+                val taskDescription = binding.editTextEditTask.text.toString()
+                if (taskDescription.isNotEmpty()) {
+                    val taskEdited = Task(id!!, taskDescription, null)
+                    if (tasksViewModel.updateTask( taskEdited )) {
                         finish()
                     }
                 } else {
-                    binding.layoutTextEditarTarefa.error = "O campo não pode está vazio!"
+                    binding.layoutTextEditTask.error = "O campo não pode está vazio!"
                 }
 
             }
         }
 
     }
-    private fun inicializarToolbar() {
+    private fun initToolbar() {
         setSupportActionBar(
-            binding.includeEditarToolbar.toolbar
+            binding.includeEditToolbar.toolbar
         ).apply {
             title = "Editar tarefa"
         }
     }
 
-    private fun inicializarMenu() {
+    private fun initMenu() {
         addMenuProvider(
             object : MenuProvider {
                 override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                    menuInflater.inflate(R.menu.menu_principal, menu)
-                    val menuOpcaoOcultar = menu.findItem( R.id.menuConfig )
-                    menuOpcaoOcultar.isVisible = false
+                    menuInflater.inflate(R.menu.menu_main, menu)
+                    val menuItemHide = menu.findItem( R.id.menuConfig )
+                    menuItemHide.isVisible = false
                 }
 
                 override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
