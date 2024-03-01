@@ -1,11 +1,13 @@
 package com.example.notessimple.presetation.ui.adapter
 
 import android.annotation.SuppressLint
+import android.icu.text.SimpleDateFormat
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessimple.data.model.Task
 import com.example.notessimple.databinding.TasksRecyclerBinding
+import formatarDataCustom
 
 class TasksAdapter(
     private val listener: ListenerOnRecyclerView
@@ -17,8 +19,13 @@ class TasksAdapter(
         private val binding: TasksRecyclerBinding
     ) : RecyclerView.ViewHolder( binding.root ){
 
+        //Formatador de data para a nota
+        private val formatDate = SimpleDateFormat("EEEE HH:mm a")
+        //private val formatDate = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
+
         fun bind(position: Int) {
             binding.textTask.text = listTasks[position].descricao
+            binding.textDate.text = listTasks[position].data_cricao.formatarDataCustom()
             binding.textIdTask.text = listTasks[position].id_tarefa.toString()
         }
 
@@ -53,7 +60,10 @@ class TasksAdapter(
 
     @SuppressLint("NotifyDataSetChanged")
     fun setListTasks(list : List<Task>) {
-        this.listTasks = list
+        this.listTasks = list.sortedByDescending {
+            it.id_tarefa
+        }
         notifyDataSetChanged()
     }
+
 }

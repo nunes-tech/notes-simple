@@ -43,6 +43,15 @@
             app:layout_constraintTop_toBottomOf="@+id/textTask"
             app:layout_constraintVertical_bias="0.5" />
 
+        <TextView
+            android:id="@+id/textDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="27/11/2024"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/textTask"
+            app:layout_constraintTop_toBottomOf="@+id/textTask" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

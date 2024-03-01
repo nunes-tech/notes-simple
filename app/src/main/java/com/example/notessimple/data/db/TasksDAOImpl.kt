@@ -15,6 +15,7 @@ class TasksDAOImpl(context: Context) : TasksDAO {
         try {
             val values = ContentValues()
             values.put(DBHelper.FIELD_DESC, task.descricao)
+            values.put(DBHelper.FIELD_DATE_CREATE, task.data_cricao)
             writer.insert(DBHelper.TABLE_TASKS, null, values)
 
             return true
@@ -27,10 +28,11 @@ class TasksDAOImpl(context: Context) : TasksDAO {
 
     override fun update(task: Task): Boolean {
         try {
-            val valores = ContentValues()
-            valores.put(DBHelper.FIELD_DESC, task.descricao)
+            val values = ContentValues()
+            values.put(DBHelper.FIELD_DESC, task.descricao)
+            values.put(DBHelper.FIELD_DATE_CREATE, task.data_cricao)
             val args = arrayOf( task.id_tarefa.toString() )
-            writer.update(DBHelper.TABLE_TASKS, valores, "${DBHelper.FIELD_ID} = ?", args)
+            writer.update(DBHelper.TABLE_TASKS, values, "${DBHelper.FIELD_ID} = ?", args)
             Log.i("db_debugger", "Item atualizado com sucesso")
             return true
 
@@ -68,7 +70,7 @@ class TasksDAOImpl(context: Context) : TasksDAO {
 
                 val id = cursor.getInt( idColumnIndex )
                 val descricao = cursor.getString( descricaoColumnIndex )
-                val data = cursor.getString( dataColumnIndex )
+                val data = cursor.getLong( dataColumnIndex )
                 val task = Task( id, descricao, data)
                 listTasks.add( task )
             }

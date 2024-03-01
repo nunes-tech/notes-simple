@@ -39,10 +39,12 @@ class EditTasksActivity : AppCompatActivity() {
         }
 
         binding.btnEditTask.setOnClickListener {
+
             if ( id != null) {
                 val taskDescription = binding.editTextEditTask.text.toString()
                 if (taskDescription.isNotEmpty()) {
-                    val taskEdited = Task(id!!, taskDescription, null)
+                    val dateCurrentMillis = System.currentTimeMillis()
+                    val taskEdited = Task(id!!, taskDescription, dateCurrentMillis)
                     if (tasksViewModel.updateTask( taskEdited )) {
                         finish()
                     }

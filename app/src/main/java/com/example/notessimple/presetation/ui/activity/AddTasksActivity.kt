@@ -31,9 +31,11 @@ class AddTasksActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.btnAddTask.setOnClickListener {
-            val texto = binding.editTextNewTask.text.toString()
-            if (texto.isNotEmpty()) {
-                val task = Task(-1, texto, null)
+
+            val taskDescription = binding.editTextNewTask.text.toString()
+            if (taskDescription.isNotEmpty()) {
+                val dateCurrentMillis = System.currentTimeMillis()
+                val task = Task(-1, taskDescription, dateCurrentMillis)
                 if (tasksViewModel.insertTask(task)) {
                     Toast.makeText(this, "Sucesso ao salvar", Toast.LENGTH_SHORT).show()
                     finish()
