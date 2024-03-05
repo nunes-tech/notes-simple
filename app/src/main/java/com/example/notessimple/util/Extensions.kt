@@ -1,44 +1,34 @@
+
 import android.icu.text.SimpleDateFormat
 import java.util.Calendar
 
-fun retornaDataDiasAtras(dia: Int) : Long {
+fun returnDaysAgo(day: Int) : Long {
     return Calendar.getInstance().apply {
-        add(Calendar.DAY_OF_MONTH, - dia)
+        add(Calendar.DAY_OF_MONTH, - day)
     }.timeInMillis
 }
 
-fun formataDataDiaMesAno(date : Long): String {
+fun formatDateDayMonthYear(date : Long): String {
     return SimpleDateFormat("dd/MM/yyyy").format(date)
 }
 
-fun Long.formatarDataCustom(): String {
-    var formatador = SimpleDateFormat("dd/MM/yyyy")
-    val dataRecebida = formatador.format(this)
+fun Long.formatDateCustom(): String {
 
-    var eHoje = false
-    var eOntem = false
-    var contador = 0
-    while (contador < 7) {
-        if (dataRecebida == formataDataDiaMesAno( retornaDataDiasAtras( contador ))) {
-            formatador = when(contador) {
-                0   -> {
-                    eHoje = true
-                    SimpleDateFormat("HH:mm a")
-                }
-                1 -> {
-                    eOntem = true
-                    SimpleDateFormat("HH:mm a")
-                }
-                in 2..6   -> SimpleDateFormat("E HH:mm a")
-                else -> SimpleDateFormat("dd/MM/yyyy")
+    var formatter = SimpleDateFormat("dd/MM/yyyy")
+    val dateReceived = formatter.format(this)
+
+    var counter = 0
+
+    while (counter < 7) {
+        if (dateReceived == formatDateDayMonthYear( returnDaysAgo( counter ))) {
+            formatter = when(counter) {
+                0               -> SimpleDateFormat("HH:mm")
+                in 1..6   -> SimpleDateFormat("E HH:mm")
+                else            -> SimpleDateFormat("dd/MM/yyyy")
             }
         }
-        contador ++
+        counter ++
     }
-    return if(eHoje) {
-         "hoje " + formatador.format(this)
-    } else if (eOntem) {
-        "ontem " + formatador.format(this)
-    }
-    else formatador.format(this)
+
+    return  formatter.format(this)
 }

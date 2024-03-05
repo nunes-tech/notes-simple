@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessimple.data.model.Task
 import com.example.notessimple.databinding.TasksRecyclerBinding
-import formatarDataCustom
+import formatDateCustom
 
 class TasksAdapter(
     private val listener: ListenerOnRecyclerView
@@ -25,7 +25,7 @@ class TasksAdapter(
 
         fun bind(position: Int) {
             binding.textTask.text = listTasks[position].descricao
-            binding.textDate.text = listTasks[position].data_cricao.formatarDataCustom()
+            binding.textDate.text = listTasks[position].data_cricao.formatDateCustom()
             binding.textIdTask.text = listTasks[position].id_tarefa.toString()
         }
 
