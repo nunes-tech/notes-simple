@@ -61,7 +61,8 @@ class TasksAdapter(
     @SuppressLint("NotifyDataSetChanged")
     fun setListTasks(list : List<Task>) {
         this.listTasks = list.sortedByDescending {
-            it.id_tarefa
+            it.data_cricao
+            //it.id_tarefa
         }
         notifyDataSetChanged()
     }
