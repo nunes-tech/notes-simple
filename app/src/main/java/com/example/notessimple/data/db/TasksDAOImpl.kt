@@ -14,8 +14,8 @@ class TasksDAOImpl(context: Context) : TasksDAO {
     override fun insert(task: Task): Boolean {
         try {
             val values = ContentValues()
-            values.put(DBHelper.FIELD_DESC, task.descricao)
-            values.put(DBHelper.FIELD_DATE_CREATE, task.data_cricao)
+            values.put(DBHelper.FIELD_DESC, task.description)
+            values.put(DBHelper.FIELD_DATE_CREATE, task.dateCreate)
             writer.insert(DBHelper.TABLE_TASKS, null, values)
 
             return true
@@ -29,9 +29,9 @@ class TasksDAOImpl(context: Context) : TasksDAO {
     override fun update(task: Task): Boolean {
         try {
             val values = ContentValues()
-            values.put(DBHelper.FIELD_DESC, task.descricao)
-            values.put(DBHelper.FIELD_DATE_CREATE, task.data_cricao)
-            val args = arrayOf( task.id_tarefa.toString() )
+            values.put(DBHelper.FIELD_DESC, task.description)
+            values.put(DBHelper.FIELD_DATE_CREATE, task.dateCreate)
+            val args = arrayOf( task.idTask.toString() )
             writer.update(DBHelper.TABLE_TASKS, values, "${DBHelper.FIELD_ID} = ?", args)
             Log.i("db_debugger", "Item atualizado com sucesso")
             return true
@@ -41,6 +41,7 @@ class TasksDAOImpl(context: Context) : TasksDAO {
             Log.i("db_debugger", "Falha ao atualizar")
             return false
         }
+
     }
 
     override fun delete(task_id: Int): Boolean {
@@ -74,6 +75,7 @@ class TasksDAOImpl(context: Context) : TasksDAO {
                 val task = Task( id, descricao, data)
                 listTasks.add( task )
             }
+            cursor.close()
             Log.i("db_debugger", "Lista recuperada")
             return listTasks
 

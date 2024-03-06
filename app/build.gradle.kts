@@ -44,6 +44,8 @@ dependencies {
 
     //Dependency Hilt
     implementation("com.google.dagger:hilt-android:2.48")
+    implementation("androidx.test:core-ktx:1.5.0")
+    testImplementation("junit:junit:4.12")
     kapt("com.google.dagger:hilt-android-compiler:2.48")
 
     //Dependency LiveData + ViewModel
@@ -63,6 +65,12 @@ dependencies {
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     testImplementation("junit:junit:4.13.2")
+    //Truth
+    testImplementation("com.google.truth:truth:1.3.0")
+    //Mockito
+    testImplementation("org.mockito:mockito-core:5.5.0")
+    //Arch Core
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
