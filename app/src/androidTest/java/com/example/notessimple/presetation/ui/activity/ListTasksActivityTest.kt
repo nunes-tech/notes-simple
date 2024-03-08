@@ -18,13 +18,14 @@ class ListTasksActivityTest {
 
     /*
     * Testes da Interface, que cobre a criação, listagem, edição e deleção dos itens do RecyclerView
+    * Logo se os testes passarem então o banco de dados com SQLite está OK também
     */
 
     @get: Rule
     val listTasksActivityScenario = ActivityScenarioRule(ListTasksActivity::class.java)
 
     @Test
-    fun criaNota_testaCriacaoDeNota() {
+    fun testCreateTask() {
 
         //Clica no botão adicionar nota - ListActivity
         onView( withId( R.id.fabAddTask ) ).perform(

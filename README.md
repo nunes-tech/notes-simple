@@ -29,3 +29,7 @@ No menu superior clique no ícone em formas de blocos e a apresentação das sua
 ✔RecyclerView
 ✔Menu
 ✔Material Toolbar
+## Testes:
+✔Unitarios com Mockito
+✔Instrumentados com Espresso 
+
