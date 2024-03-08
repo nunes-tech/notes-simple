@@ -20,9 +20,6 @@
             android:name=".presetation.ui.activity.EditTasksActivity"
             android:exported="false" />
         <activity
-            android:name=".presetation.ui.activity.OutraTelaActivity"
-            android:exported="false" />
-        <activity
             android:name=".presetation.ui.activity.ListTasksActivity"
             android:exported="true">
             <intent-filter>
