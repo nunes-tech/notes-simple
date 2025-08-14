@@ -6,15 +6,15 @@ plugins {
 }
 
 android {
-    namespace = "com.example.notessimple"
+    namespace = "com.nunes.notas"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.notessimple"
+        applicationId = "com.nunes.notas"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 36
         versionCode = 1
-        versionName = "1.1"
+        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -29,24 +29,24 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
-    viewBinding {
-        enable = true
+    buildFeatures {
+        viewBinding = true
     }
 }
 
 dependencies {
 
     //Dependency Hilt
-    implementation("com.google.dagger:hilt-android:2.48")
-    implementation("androidx.test:core-ktx:1.5.0")
-    testImplementation("junit:junit:4.12")
-    kapt("com.google.dagger:hilt-android-compiler:2.48")
+    implementation("com.google.dagger:hilt-android:2.57")
+    implementation("androidx.test:core-ktx:1.7.0")
+    testImplementation("junit:junit:4.13.2")
+    kapt("com.google.dagger:hilt-android-compiler:2.57")
 
     //Dependency LiveData + ViewModel
     val lifecycle_version = "2.7.0"
@@ -60,22 +60,22 @@ dependencies {
     val fragment_version = "1.6.2"
     implementation("androidx.fragment:fragment-ktx:$fragment_version")
 
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.11.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.core:core-ktx:1.16.0")
+    implementation("androidx.appcompat:appcompat:1.7.1")
+    implementation("com.google.android.material:material:1.12.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.2.1")
     testImplementation("junit:junit:4.13.2")
     //Truth
-    testImplementation("com.google.truth:truth:1.3.0")
+    testImplementation("com.google.truth:truth:1.4.4")
     //Mockito
-    testImplementation("org.mockito:mockito-core:5.5.0")
+    testImplementation("org.mockito:mockito-core:5.18.0")
     //Arch Core
     testImplementation("androidx.arch.core:core-testing:2.2.0")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.ext:junit:1.3.0")
     //Espresso
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.7.0")
     //Espresso for test RecyclerView
-    androidTestImplementation( "androidx.test.espresso:espresso-contrib:3.5.1")
+    androidTestImplementation( "androidx.test.espresso:espresso-contrib:3.7.0")
 }
 
 kapt {

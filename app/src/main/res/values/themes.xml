@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/primaria</item>
         <item name="colorSecondary">@color/secundaria</item>
         <item name="actionOverflowButtonStyle">@style/style.toolbar</item>
+
     </style>
 
     <style name="style.toolbar" parent="@style/Widget.AppCompat.ActionButton.Overflow">

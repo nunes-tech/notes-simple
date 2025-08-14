@@ -11,4 +11,11 @@
         android:id="@+id/menuNovaTarefa"
         android:title="Nova tarefa"
         android:visible="false" />
+    <item
+        android:id="@+id/save"
+        android:title="Salvar"
+        android:icon="@drawable/ic_save_toolbar"
+        app:showAsAction="always"
+        android:visible="false"/>
+
 </menu>
