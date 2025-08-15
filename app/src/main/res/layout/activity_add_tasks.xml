@@ -35,6 +35,7 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:hint="Título"
+            android:inputType="text|textCapSentences"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -48,12 +49,55 @@
             android:ems="10"
             android:gravity="start|top"
             android:hint="escreva aqui..."
-            android:inputType="textMultiLine"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:inputType="text|textCapSentences|textMultiLine"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextNewTaskTitle" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ToggleButton
+                android:id="@+id/btnAddBold"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="B"
+                android:textOff="B"
+                android:textOn="B"
+                android:textColor="@drawable/button_checked_toggle"
+                android:textStyle="bold" />
+
+            <ToggleButton
+                android:id="@+id/btnAddItalic"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="I"
+                android:textOff="I"
+                android:textOn="I"
+                android:textColor="@drawable/button_checked_toggle"
+                android:textStyle="italic" />
+
+            <ToggleButton
+                android:id="@+id/btnAddSub"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="S"
+                android:textOff="S"
+                android:textOn="S"
+                android:textColor="@drawable/button_checked_toggle"/>
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -64,6 +108,8 @@
         android:layout_marginBottom="24dp"
         android:clickable="true"
         android:contentDescription="Button to save task"
+        app:tint="@color/white"
+        app:backgroundTint="?attr/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/save" />

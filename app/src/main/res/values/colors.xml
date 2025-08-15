@@ -5,4 +5,8 @@
     <color name="primaria">#2196F3</color>
     <color name="secundaria">#009688</color>
     <color name="cinza">#5F5D5D</color>
+
+<!--    Cores tema -->
+    <color name="primaria_dark">#00314A</color>
+    <color name="secundaria_dark">#003C35</color>
 </resources>

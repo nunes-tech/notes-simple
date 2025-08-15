@@ -1,7 +1,15 @@
 package com.nunes.notas.presetation.ui.activity
 
 import android.annotation.SuppressLint
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.Editable
+import android.text.Html
+import android.text.Spannable
+import android.text.Spanned
+import android.text.TextWatcher
+import android.text.style.StyleSpan
+import android.text.style.UnderlineSpan
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -18,6 +26,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AddTasksActivity : AppCompatActivity() {
+    private var boldActive = false
+    private var italicActive = false
+    private var underlineActive = false
 
     private val binding by lazy {
         ActivityAddTasksBinding.inflate(layoutInflater)
@@ -35,9 +46,22 @@ class AddTasksActivity : AppCompatActivity() {
         binding.editTextNewTaskTitle.requestFocus()
         showKeyboard(binding.editTextNewTaskTitle)
 
+        binding.btnAddBold.setOnCheckedChangeListener { _, isChecked ->
+            boldActive = isChecked
+        }
+
+        binding.btnAddItalic.setOnCheckedChangeListener { _, isChecked ->
+            italicActive = isChecked
+        }
+
+        binding.btnAddSub.setOnCheckedChangeListener { _, isChecked ->
+            underlineActive = isChecked
+        }
+
         binding.btnAddTask.setOnClickListener {
             saveNote()
         }
+        onChangedText()
     }
 
     private fun initToolbar() {
@@ -75,10 +99,15 @@ class AddTasksActivity : AppCompatActivity() {
         val taskTitle = binding.editTextNewTaskTitle.text.toString()
         val taskDescription = binding.editTextNewTaskNote.text.toString()
         if (taskDescription.isNotEmpty()) {
-            val taskTitleValid = taskTitle.ifEmpty { taskDescription.substring(0, 25) }
+            val taskTitleValid = taskTitle.ifEmpty { taskDescription.substring(0, 40) }
             Toast.makeText(this, taskTitleValid, Toast.LENGTH_SHORT).show()
             val dateCurrentMillis = System.currentTimeMillis()
-            val task = Task(-1, taskTitleValid, taskDescription, dateCurrentMillis)
+            val task = Task(
+                -1,
+                taskTitleValid,
+                saveToHtml(binding.editTextNewTaskNote.text),
+                dateCurrentMillis
+            )
             if (tasksViewModel.insertTask(task)) {
                 Toast.makeText(this, "Sucesso ao salvar", Toast.LENGTH_SHORT).show()
                 finish()
@@ -88,6 +117,49 @@ class AddTasksActivity : AppCompatActivity() {
         } else {
             //binding.layoutTextAddTask.error = "Digite uma tarefa"
         }
+    }
+
+    private fun onChangedText() {
+        binding.editTextNewTaskNote.addTextChangedListener(object : TextWatcher {
+            private var start = 0
+            private var end = 0
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                this.start = start
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                end = start + count
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                if (end > start) { // Foi inserido texto
+                    applyDynamicStyle(s, start, end)
+                }
+            }
+        })
+    }
+
+    private fun applyDynamicStyle(editable: Editable?, start: Int, end: Int) {
+        if (editable == null) return
+
+        if (boldActive) {
+            editable.setSpan(StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+        if (italicActive) {
+            editable.setSpan(StyleSpan(Typeface.ITALIC), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+        if (underlineActive) {
+            editable.setSpan(UnderlineSpan(), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+    }
+
+    private fun saveToHtml(html: Editable): String {
+        return Html.toHtml(html, Html.TO_HTML_PARAGRAPH_LINES_INDIVIDUAL)
+    }
+
+    private fun getHtml(html: String): Spanned {
+        return Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY)
     }
 
 }
