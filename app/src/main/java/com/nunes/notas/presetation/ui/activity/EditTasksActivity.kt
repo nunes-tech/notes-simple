@@ -16,12 +16,15 @@ import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
+import checkIconThemeMode
+import checkThemeActive
 import com.google.android.material.internal.ViewUtils.showKeyboard
 import com.nunes.notas.R
 import com.nunes.notas.data.model.Task
 import com.nunes.notas.databinding.ActivityEditTasksBinding
 import com.nunes.notas.presetation.viewmodel.TasksViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import toggleModeLightOrDark
 
 @AndroidEntryPoint
 class EditTasksActivity : AppCompatActivity() {
@@ -41,6 +44,8 @@ class EditTasksActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        checkThemeActive()
         initToolbar()
         initMenu()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -145,6 +150,8 @@ class EditTasksActivity : AppCompatActivity() {
             object : MenuProvider {
                 override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                     menuInflater.inflate(R.menu.menu_main, menu)
+
+                    checkIconThemeMode(menu)
                     val menuItemHide = menu.findItem( R.id.menuConfig )
                     menuItemHide.isVisible = false
                     val menuSave = menu.findItem(R.id.save)
@@ -154,6 +161,11 @@ class EditTasksActivity : AppCompatActivity() {
 
                 override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                     when(menuItem.itemId) {
+                        R.id.menuThemeMode -> {
+                            if (toggleModeLightOrDark()) {
+                                menuItem.setIcon(R.drawable.ic_light_mode_24)
+                            } else menuItem.setIcon(R.drawable.ic_dark_mode_24)
+                        }
                         android.R.id.home -> finish()
                         R.id.save -> saveNote()
                     }

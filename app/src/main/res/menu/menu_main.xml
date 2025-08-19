@@ -3,6 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/menuThemeMode"
+        android:icon="@drawable/ic_dark_mode_24"
+        android:title="Tema"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/menuConfig"
         android:icon="@drawable/ic_toggle_list_24"
         android:title="Configurar"

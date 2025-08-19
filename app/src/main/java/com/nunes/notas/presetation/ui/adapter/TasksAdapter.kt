@@ -1,5 +1,6 @@
 package com.nunes.notas.presetation.ui.adapter
 
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup

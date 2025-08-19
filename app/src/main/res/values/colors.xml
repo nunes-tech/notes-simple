@@ -2,9 +2,15 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="orange">#FF5722</color>
+    <color name="yellow">#FFC107</color>
+    <color name="purple">#673AB7</color>
+    <color name="green">#4CAF50</color>
     <color name="primaria">#2196F3</color>
     <color name="secundaria">#009688</color>
+    <color name="terciaria">#03A9F4</color>
     <color name="cinza">#5F5D5D</color>
+    <color name="bg_light">#B1CDCDCD</color>
 
 <!--    Cores tema -->
     <color name="primaria_dark">#00314A</color>

@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import checkIconThemeMode
+import checkThemeActive
 import com.nunes.notas.R
 import com.nunes.notas.databinding.ActivityListTasksBinding
 import com.nunes.notas.presetation.ui.adapter.ListenerOnRecyclerView
@@ -19,6 +21,8 @@ import com.nunes.notas.presetation.ui.adapter.TasksAdapter
 import com.nunes.notas.presetation.viewmodel.TasksViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import getSharedPreferences
+import toggleModeLightOrDark
 
 @AndroidEntryPoint
 class ListTasksActivity : AppCompatActivity(), ListenerOnRecyclerView {
@@ -43,6 +47,7 @@ class ListTasksActivity : AppCompatActivity(), ListenerOnRecyclerView {
         super.onCreate(savedInstanceState)
         setContentView( binding.root )
 
+        checkThemeActive()
         initObserve()
         initToolbar()
         initMenu()
@@ -128,12 +133,20 @@ class ListTasksActivity : AppCompatActivity(), ListenerOnRecyclerView {
             object : MenuProvider {
                 override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                     menuInflater.inflate(R.menu.menu_main, menu)
+
+                    checkIconThemeMode(menu)
+
                     val menuNewTask = menu.findItem( R.id.menuNovaTarefa )
                     menuNewTask.isVisible = true
                 }
 
                 override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                     when(menuItem.itemId) {
+                        R.id.menuThemeMode -> {
+                            if (toggleModeLightOrDark()) {
+                                menuItem.setIcon(R.drawable.ic_light_mode_24)
+                            } else menuItem.setIcon(R.drawable.ic_dark_mode_24)
+                        }
                         R.id.menuConfig -> setRecyclerViewTarefas()
                         R.id.menuNovaTarefa -> createTask()
                     }
