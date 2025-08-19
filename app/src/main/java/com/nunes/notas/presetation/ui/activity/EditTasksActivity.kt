@@ -58,8 +58,6 @@ class EditTasksActivity : AppCompatActivity() {
                 if (task != null) {
                     binding.editTextEditTaskTitle.setText(task.title)
                     binding.editTextTextTaskNote.setText(getHtml(task.description!!))
-                    binding.editTextEditTaskTitle.requestFocus()
-                    showKeyboard(binding.editTextEditTaskTitle)
                 } else {
                     finish()
                 }

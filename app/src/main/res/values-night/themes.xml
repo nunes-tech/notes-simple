@@ -7,4 +7,8 @@
         <item name="colorOnPrimary">@color/primaria</item>
         <item name="colorOnSecondary">@color/cinza</item>
     </style>
+
+    <style name="Theme.NotesSimple" parent="Base.Theme.NotesSimple">
+        <item name="fontFamily">@font/roboto</item>
+    </style>
 </resources>
