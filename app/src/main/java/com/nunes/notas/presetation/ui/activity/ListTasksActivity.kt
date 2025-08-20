@@ -53,6 +53,7 @@ class ListTasksActivity : AppCompatActivity(), ListenerOnRecyclerView {
         initMenu()
         setRecyclerViewTarefas()
         binding.fabAddTask.setOnClickListener { createTask() }
+        binding.imgBtnNoNotes.setOnClickListener { createTask() }
     }
 
     override fun itemClick(id: Int, tarefa: String) {
@@ -67,9 +68,9 @@ class ListTasksActivity : AppCompatActivity(), ListenerOnRecyclerView {
         tasksViewModel.listTasks.observe(this) { listTasks ->
             adapterTasks.setListTasks( listTasks )
             if(listTasks.isEmpty()) {
-                binding.imageNoNotes.visibility = View.VISIBLE
+                binding.clHelper.visibility = View.VISIBLE
             } else {
-                binding.imageNoNotes.visibility = View.GONE
+                binding.clHelper.visibility = View.GONE
             }
         }
     }

@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -47,6 +48,9 @@ dependencies {
     implementation("androidx.test:core-ktx:1.7.0")
     testImplementation("junit:junit:4.13.2")
     kapt("com.google.dagger:hilt-android-compiler:2.57")
+
+    implementation(platform("com.google.firebase:firebase-bom:34.1.0"))
+    implementation("com.google.firebase:firebase-analytics")
 
     //Dependency LiveData + ViewModel
     val lifecycle_version = "2.7.0"

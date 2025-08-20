@@ -14,9 +14,7 @@
     </style>
 
     <style name="style.toolbar" parent="@style/Widget.AppCompat.ActionButton.Overflow">
-        <item name="tint">
-            @color/white
-        </item>
+        <item name="tint">@color/white</item>
     </style>
 
     <style name="Theme.NotesSimple" parent="Base.Theme.NotesSimple">
