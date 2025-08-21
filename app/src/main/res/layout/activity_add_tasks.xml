@@ -50,17 +50,16 @@
             android:gravity="start|top"
             android:hint="escreva aqui..."
             android:inputType="text|textCapSentences|textMultiLine"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintBottom_toTopOf="@+id/clButtonsStylesAdd"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextNewTaskTitle" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout2"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clButtonsStylesAdd"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -69,35 +68,55 @@
             <ToggleButton
                 android:id="@+id/btnAddBold"
                 style="@style/Widget.Material3.Button.TextButton"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:foreground="@drawable/ripple_color_item"
                 android:text="B"
+                android:textColor="@drawable/button_checked_toggle"
                 android:textOff="B"
                 android:textOn="B"
-                android:textColor="@drawable/button_checked_toggle"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnAddItalic"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
 
             <ToggleButton
                 android:id="@+id/btnAddItalic"
                 style="@style/Widget.Material3.Button.TextButton"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
+                android:foreground="@drawable/ripple_color_item"
                 android:text="I"
+                android:textColor="@drawable/button_checked_toggle"
                 android:textOff="I"
                 android:textOn="I"
-                android:textColor="@drawable/button_checked_toggle"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnAddSub"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btnAddBold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
 
             <ToggleButton
                 android:id="@+id/btnAddSub"
                 style="@style/Widget.Material3.Button.TextButton"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
+                android:foreground="@drawable/ripple_color_item"
                 android:text="S"
+                android:textColor="@drawable/button_checked_toggle"
                 android:textOff="S"
                 android:textOn="S"
-                android:textColor="@drawable/button_checked_toggle"/>
-        </LinearLayout>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btnAddItalic"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

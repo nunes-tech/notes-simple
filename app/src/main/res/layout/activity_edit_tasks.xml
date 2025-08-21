@@ -58,11 +58,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextEditTaskTitle" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clButtonsStylesEdit"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -71,35 +70,55 @@
             <ToggleButton
                 android:id="@+id/btnEditBold"
                 style="@style/Widget.Material3.Button.TextButton"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:foreground="@drawable/ripple_color_item"
                 android:text="B"
                 android:textColor="@drawable/button_checked_toggle"
                 android:textOff="B"
                 android:textOn="B"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnEditItalic"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
 
             <ToggleButton
                 android:id="@+id/btnEditItalic"
                 style="@style/Widget.Material3.Button.TextButton"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
+                android:foreground="@drawable/ripple_color_item"
                 android:text="I"
-                android:textOn="I"
+                android:textColor="@drawable/button_checked_toggle"
                 android:textOff="I"
+                android:textOn="I"
                 android:textStyle="italic"
-                android:textColor="@drawable/button_checked_toggle"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnEditSub"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btnEditBold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
 
             <ToggleButton
                 android:id="@+id/btnEditSub"
                 style="@style/Widget.Material3.Button.TextButton"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
+                android:foreground="@drawable/ripple_color_item"
                 android:text="S"
-                android:textOn="S"
+                android:textColor="@drawable/button_checked_toggle"
                 android:textOff="S"
-                android:textColor="@drawable/button_checked_toggle"/>
-        </LinearLayout>
+                android:textOn="S"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btnEditItalic"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
